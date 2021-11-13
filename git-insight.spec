@@ -8,7 +8,7 @@ URL:            https://github.com/avimehenwal/git-insight
 Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 
-Requires:       bash coreutils sed awk
+Requires:       bash coreutils sed
 Requires:       python-pip
 
 %description
