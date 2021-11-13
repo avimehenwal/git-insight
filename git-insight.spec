@@ -21,7 +21,7 @@ beautiful graphical insights about a git repository.
 %autosetup
 
 %pre
-python -m pip install --user termgraph
+python3 -m pip install --user termgraph
 
 %build
 
