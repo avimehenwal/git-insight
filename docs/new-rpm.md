@@ -5,6 +5,7 @@
 - [x] tag RPM package
 - [ ] publish and release rpm package
 - [ ] auto-generate changelog file
+- [ ] configure copr-cli
 
 ```
 rpmdev-setuptree

@@ -37,3 +37,6 @@ install --mode=755 -v src/main.sh %{buildroot}/%{_bindir}/git-insight
 %changelog
 * Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.1-1
 - new package built with tito
+
+* Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.1-1
+- new package built with tito
