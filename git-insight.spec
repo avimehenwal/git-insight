@@ -1,5 +1,5 @@
 Name:           git-insight
-Version:        0.0.3
+Version:        1.0.0
 Release:        1%{?dist}
 Summary:        beautiful graphical insights about a git repository
 License:        MIT
@@ -37,6 +37,9 @@ install -D --mode=644 -v build/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 1.0.0-1
+- feat(graph): :art: add add/del stacked graph (avi.mehanwal@gmail.com)
+
 * Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.3-1
 - feat(rpm): :memo: add manpage (avi.mehanwal@gmail.com)
 - test(rpm): :test_tube: build and install rpm into a docker fedora image
