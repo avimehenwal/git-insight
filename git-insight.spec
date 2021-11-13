@@ -1,5 +1,5 @@
 Name:           git-insight
-Version:        0.0.2
+Version:        0.0.3
 Release:        1%{?dist}
 Summary:        beautiful graphical insights about a git repository
 License:        MIT
@@ -37,6 +37,13 @@ install -D --mode=644 -v build/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.3-1
+- feat(rpm): :memo: add manpage (avi.mehanwal@gmail.com)
+- test(rpm): :test_tube: build and install rpm into a docker fedora image
+  (avi.mehanwal@gmail.com)
+- build(rpm): :package: remove group from preamble (avi.mehanwal@gmail.com)
+- fix: install it on docker fedora (avi.mehanwal@gmail.com)
+
 * Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.2-1
 - build: :bug: use py3 instead of py2 (avi.mehanwal@gmail.com)
 - build(rpm): remove awk from Requires (avi.mehanwal@gmail.com)
