@@ -28,9 +28,15 @@ tito build --rpm --test
 
 ```
 rpm -ql /tmp/tito/noarch/git-insight-0.0.1-1.git.2.a0a31dd.fc35.noarch.rpm
+sudo dnf install --refresh git-insight
 ```
+
+## Architecture
+
+Extra Packages for Enterprise Linux (EPEL) - Fedora Docs
 
 ### Resources
 
 - [spec file help](https://rpm-packaging-guide.github.io/#what-is-a-spec-file)
 - [official spec file macros](https://rpm-software-management.github.io/rpm/manual/spec.html)
+- [linux FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html)
