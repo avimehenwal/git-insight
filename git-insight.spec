@@ -2,7 +2,6 @@ Name:           git-insight
 Version:        0.0.2
 Release:        1%{?dist}
 Summary:        beautiful graphical insights about a git repository
-Group:          Development/Tools
 License:        MIT
 URL:            https://github.com/avimehenwal/git-insight
 Source0:        %{name}-%{version}.tar.gz
