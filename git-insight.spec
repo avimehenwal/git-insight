@@ -9,7 +9,7 @@ Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 
 Requires:       bash coreutils sed
-Requires:       python-pip
+Requires:       python3-pip
 
 %description
 Use it inside any directory
@@ -21,7 +21,7 @@ beautiful graphical insights about a git repository.
 %autosetup
 
 %pre
-pip-python install termgraph
+python -m pip install --user termgraph
 
 %build
 
