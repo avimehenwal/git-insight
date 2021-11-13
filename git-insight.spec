@@ -9,7 +9,7 @@ BuildArch:      noarch
 
 BuildRequires:  pandoc make
 Requires:       bash >= 5.1.8
-Requires:       coreutils sed
+Requires:       coreutils sed git fzf
 Requires:       python3-pip
 
 %description

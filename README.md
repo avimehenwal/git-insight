@@ -4,6 +4,10 @@ beautified git information for better understanding
 
 [package](https://copr.fedorainfracloud.org/coprs/avimehenwal/git-insight/)
 
+## Demo
+
+![demo git-insight](docs/demo-add-dels.png)
+
 ## How to install
 
 ```bash

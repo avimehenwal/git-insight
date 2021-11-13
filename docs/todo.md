@@ -1,9 +1,12 @@
 # Todo
 
-- [ ] man pages
+- [x] man pages
 - [ ] application data /opt, /var or FHS specific place
 - [ ] test
-- [ ] proper logs in /var/logs
+- [x] proper logs in /var/logs
+- [ ] shell completions
+- [ ] [zsh autoloading functions](https://unix.stackexchange.com/a/33898/32890)
+- [ ] coloured echoed console logs
 
 ## Man pages
 
