@@ -1,5 +1,5 @@
 Name:           git-insight
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
 Summary:        beautiful graphical insights about a git repository
 Group:          Development/Tools
@@ -35,6 +35,12 @@ install --mode=755 -v src/main.sh %{buildroot}/%{_bindir}/git-insight
 %{_bindir}/git-insight
 
 %changelog
+* Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.2-1
+- build: :bug: use py3 instead of py2 (avi.mehanwal@gmail.com)
+- build(rpm): remove awk from Requires (avi.mehanwal@gmail.com)
+- Automatic commit of package [git-insight] release [0.0.1-1].
+  (avi.mehanwal@gmail.com)
+
 * Sat Nov 13 2021 avimehenwal <avi.mehanwal@gmail.com> 0.0.1-1
 - new package built with tito
 
