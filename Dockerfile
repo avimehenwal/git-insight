@@ -3,7 +3,7 @@ FROM fedora
 RUN dnf install -y 'dnf-command(copr)' && \
   dnf copr enable -y avimehenwal/git-insight
 RUN dnf -y --refresh update
-RUN dnf install -y tito
+RUN dnf install -y tito pandoc make man
 
 WORKDIR /SOURCES
 VOLUME /SOURCES

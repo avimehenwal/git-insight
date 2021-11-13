@@ -1,2 +1,5 @@
 build.log
 COMMIT.md
+
+# build artifacts directory
+build/*

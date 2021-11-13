@@ -1,13 +1,19 @@
-% HELLO(1) Version 1.0 | Frivolous "Hello World" Documentation
+% GIT-INSIGHT(1) Version 0.2 | git-insight "git visualizer" Documentation
 
 # NAME
 
-**hello** — prints Hello, World!
+**git-insight** — prints git statistics The Visual Way
 
 # SYNOPSIS
 
-| **hello** \[**-o**|**--out** _file_] \[_dedication_]
-| **hello** \[**-h**|**--help**|**-v**|**--version**]
+| **hello** \[**-o** | **--out** _file_] \[_dedication_]
+| **hello** \[**-h** | **--help**|**-v**|**--version**]
+
+# EXAMPLES
+
+_some command_
+
+: Per-user default dedication file.
 
 # DESCRIPTION
 
@@ -55,11 +61,11 @@ if a dedication is not supplied on the command line.
 
 # BUGS
 
-See GitHub Issues: <https://github.com/[owner]/[repo]/issues>
+See GitHub Issues: <https://github.com/avimehenwal/git-insight/issues>
 
 # AUTHOR
 
-Foobar Goodprogrammer <foo@example.org>
+Avi Mehenwal <avi.mehanwal@gmail.com>
 
 # SEE ALSO
 
