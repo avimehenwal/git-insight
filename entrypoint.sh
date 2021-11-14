@@ -7,19 +7,24 @@
 #
 # Long problem description
 
-BUILD_LOG=build.log
-
+BUILD_LOG="./build/build.log"
+NAME="git-insight"
 tito build --rpm --test | tee ${BUILD_LOG}
 
 RPM=$(awk 'END{print $2}' ${BUILD_LOG})
-echo "RPM => $RPM"
-[ -f "$RPM" ] && echo "RPM exists ==> $RPM" || echo "RPM DOES NOT Exist ==> $RPM"
+echo "RPM => ${RPM}"
+[ -f "${RPM}" ] && echo "RPM exists ==> ${RPM}" || echo "RPM DOES NOT Exist ==> ${RPM}"
 
+remove_pkg() {
+  sudo dnf remove -y ${NAME}
+}
+
+rpm -q ${NAME} && remove_pkg
 BEFORE="before = $(ls /usr/bin | wc)"
-dnf localinstall -y ${RPM}
+sudo dnf localinstall -y ${RPM}
 AFTER="after = $(ls /usr/bin | wc)"
 
-whoami
+# run
 git-insight
 
 echo -e "$BEFORE \n $AFTER"

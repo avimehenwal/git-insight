@@ -34,7 +34,8 @@ else
 	@echo "pandoc is not installed, skipping manpages generation"
 endif
 
-build: man
+local: man
+	./entrypoint.sh
 
 
 

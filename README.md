@@ -8,6 +8,8 @@ beautified git information for better understanding
 
 ![demo git-insight](docs/demo-add-dels.png)
 
+![git calendar](docs/demo-git-calendar.png)
+
 ## How to install
 
 ```bash

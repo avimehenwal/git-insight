@@ -14,4 +14,6 @@ able to install package and run from SHELL but NOT from CMD in docker
 
 - tried bash <script-name.sh>
 
-## Bash
+## Termgraph
+
+- color NOT working with calendar graph type

@@ -79,16 +79,38 @@ git_trend() {
         else if($3=="")print$0",0"; \
         else print$0}'
 }
+git_log_length() {
+  git rev-list --all --count
+}
 
+# GIT-GRAPHS
 git_trend_graph() {
   local NUM_COMMITS=${1:-${DEFAULT_LOGS}}
-  git_trend | termgraph --stacked --color {blue,red} \
-    --title "Number of Files changed::Additions/deletions in last $NUM_COMMITS commits"
+  local BG=4
+  local FG=15
+  local TITLE="Number of Files changed::Additions/deletions in last $(tput bold)${NUM_COMMITS}$(tput setab ${BG})$(tput setaf ${FG}) commits"
+  echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
+  git_trend | termgraph --stacked --color {blue,red}
+}
+git_log_calendar() {
+  local GIT_LOG_LENGTH=$(git_log_length)
+  local BG=8
+  local FG=15
+  local TITLE="Trends over the total of $(tput bold)$(tput blink)${GIT_LOG_LENGTH} commits"
+  echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
+  git_trend ${GIT_LOG_LENGTH} |
+    tail -n +2 |
+    cut --delimiter=',' -f1 |
+    termgraph --calendar --title "Total number of Files modified for last ${GIT_LOG_LENGTH} logs"
 }
 
 # MAIN
+# test: 1
 git_trend_graph
 # git_trend_graph 15
 # git_trend_graph 15000
+
+# test: 2
+git_log_calendar
 
 # END
