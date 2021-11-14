@@ -12,7 +12,11 @@ APP_TAG="git-insight"
 declare -A PRIORITY
 
 PRIORITY=(["emerg"]="0" ["alert"]="1" ["crit"]="2" ["err"]="3" ["warn"]="4" ["notice"]="5" ["info"]="6" ["debug"]="7")
+
 DEFAULT_LOGS=10
+DEFAULT_COMMITS=10
+DEFAULT_LEADERS=10
+DEFAULT_TOP_FILES=8
 
 SYSLOG() {
   local LOG_LEVEL=$1
@@ -82,6 +86,31 @@ git_trend() {
 git_log_length() {
   git rev-list --all --count
 }
+git_commit() {
+  local NUM_COMMITS=${1:-${DEFAULT_COMMITS}}
+  git log --date=short --pretty=format:%ad -${NUM_COMMITS} |
+    sort --reverse |
+    uniq -c |
+    awk '{print$2" "$1}'
+}
+git_top_files_modified() {
+  local TOP_FILE=${1:-${DEFAULT_TOP_FILES}}
+  git log --pretty=format: --name-only |
+    sort |
+    uniq -c |
+    sort -rg |
+    tail -n +2 |
+    head -${TOP_FILE}
+}
+git_branch_commits() {
+  for item in $(git branch --remote --list --no-color |
+    grep --invert-match HEAD |
+    sed -e 's/[ ]*//'); do
+    # echo -e "git rev-list --count $item"
+    local count=$(git rev-list --count $item)
+    echo "$item, $count"
+  done
+}
 
 # GIT-GRAPHS
 git_trend_graph() {
@@ -90,7 +119,7 @@ git_trend_graph() {
   local FG=15
   local TITLE="Number of Files changed::Additions/deletions in last $(tput bold)${NUM_COMMITS}$(tput setab ${BG})$(tput setaf ${FG}) commits"
   echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
-  git_trend | termgraph --stacked --color {blue,red}
+  git_trend | termgraph --stacked --color {cyan,red}
 }
 git_log_calendar() {
   local GIT_LOG_LENGTH=$(git_log_length)
@@ -101,16 +130,44 @@ git_log_calendar() {
   git_trend ${GIT_LOG_LENGTH} |
     tail -n +2 |
     cut --delimiter=',' -f1 |
-    termgraph --calendar --title "Total number of Files modified for last ${GIT_LOG_LENGTH} logs"
+    termgraph --calendar --color green
+}
+git_commit_graph() {
+  local NUM_COMMITS=${1:-${DEFAULT_COMMITS}}
+  git_commit ${NUM_COMMITS} |
+    termgraph --color magenta --title "#Commit history for last ${NUM_COMMITS} logs"
+}
+git_leaderboard() {
+  local NUM=${1:-${DEFAULT_LEADERS}}
+  git shortlog --summary --numbered |
+    head -${NUM} |
+    awk '{print $2 $3 $4, $1}' |
+    termgraph --color yellow --title "LEADERBOARD:: Top ${NUM} Contributors"
+
+}
+git_hot_files_graph() {
+  local TOP_FILE=${1:-${DEFAULT_TOP_FILES}}
+  git_top_files_modified ${TOP_FILE} |
+    awk '{print$2", "$1}' |
+    termgraph --color blue --title "Most frequently updated files"
+}
+branch_comparison_graph() {
+  local TITLE="Number of commits on each branch"
+  git_branch_commits | termgraph --color black --title "${TITLE}"
 }
 
-# MAIN
+# TEST
 # test: 1
-git_trend_graph
+# git_trend_graph
 # git_trend_graph 15
 # git_trend_graph 15000
 
-# test: 2
+# MAIN
+git_commit_graph
+git_trend_graph
 git_log_calendar
+git_leaderboard
+git_hot_files_graph
+branch_comparison_graph
 
 # END

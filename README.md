@@ -4,18 +4,27 @@ beautified git information for better understanding
 
 [package](https://copr.fedorainfracloud.org/coprs/avimehenwal/git-insight/)
 
-## Demo
-
-![demo git-insight](docs/demo-add-dels.png)
-
-![git calendar](docs/demo-git-calendar.png)
-
 ## How to install
 
 ```bash
 sudo dnf copr enable avimehenwal/git-insight
 sudo dnf install git-insight
 ```
+
+## Demo
+
+Analysis of current repo using this tool
+
+![git-insight repository analysis](docs/repo-analysis.png)
+
+## Featured Graphs
+
+- [x] Number of commites on a day
+- [x] Number of files changed, Number of changes (+/-) made on commits
+- [x] Trend over entire source history
+- [x] Top 10 contributors
+- [x] Most frequently updated files
+- [x] Branch comparison
 
 #### :v: Get in touch with me
 
