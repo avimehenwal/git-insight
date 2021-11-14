@@ -1,0 +1,12 @@
+#compdef git-insight
+
+local -a graphs
+
+graphs+='graph_git_commit:displays Commit history for last 10 logs'
+graphs+='graph_git_trend:Number of Additions/deletions and files that changed'
+graphs+='graph_git_leaderboard:Top 10 Contributors'
+graphs+='graph_git_hot_files:Most frequently updated files'
+graphs+='graph_branch_comparison:Number of commits on each branch'
+graphs+='calendar_graph_git_log:Trends over the total number of commits on repo'
+
+_describe 'command' graphs

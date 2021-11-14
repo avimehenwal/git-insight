@@ -32,10 +32,12 @@ make man
 mkdir -p %{buildroot}/%{_bindir}
 install --mode=755 -v src/main.sh %{buildroot}%{_bindir}/%{name}
 install -D --mode=644 -v build/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+install -D --mode=644 -v src/_completion %{buildroot}/usr/local/share/zsh/site-functions/_%{name}
 
 %files
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1.gz
+/usr/local/share/zsh/site-functions/_%{name}
 
 %changelog
 * Sun Nov 14 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.1-1

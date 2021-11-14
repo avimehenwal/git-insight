@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "rpm",
-    "graph"
+    "graph",
+    "zsh"
   ]
 }

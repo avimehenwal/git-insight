@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/zsh
 
 # AUTHOR      : avimehenwal
 # DATE        : 13-Nov-2021
@@ -10,7 +10,6 @@
 APP_ID="67feb6ffbaf24c5cbec13c008dd72309"
 APP_TAG="git-insight"
 declare -A PRIORITY
-
 PRIORITY=(["emerg"]="0" ["alert"]="1" ["crit"]="2" ["err"]="3" ["warn"]="4" ["notice"]="5" ["info"]="6" ["debug"]="7")
 
 DEFAULT_LOGS=10
@@ -69,7 +68,7 @@ DEBUG() {
 # DEBUG "monitoring info"
 
 # GIT-FUNCTIONS
-git_trend() {
+data_git_trend() {
   local NUM_COMMITS=${1:-${DEFAULT_LOGS}}
   git log --date=short --pretty=@%ad --shortstat -${NUM_COMMITS} |
     tr "filechangedinsertionsdeletions()+" " " |
@@ -83,17 +82,17 @@ git_trend() {
         else if($3=="")print$0",0"; \
         else print$0}'
 }
-git_log_length() {
+data_git_log_length() {
   git rev-list --all --count
 }
-git_commit() {
+data_git_commit() {
   local NUM_COMMITS=${1:-${DEFAULT_COMMITS}}
   git log --date=short --pretty=format:%ad -${NUM_COMMITS} |
     sort --reverse |
     uniq -c |
     awk '{print$2" "$1}'
 }
-git_top_files_modified() {
+data_git_top_files_modified() {
   local TOP_FILE=${1:-${DEFAULT_TOP_FILES}}
   git log --pretty=format: --name-only |
     sort |
@@ -102,7 +101,7 @@ git_top_files_modified() {
     tail -n +2 |
     head -${TOP_FILE}
 }
-git_branch_commits() {
+data_git_branch_commits() {
   for item in $(git branch --remote --list --no-color |
     grep --invert-match HEAD |
     sed -e 's/[ ]*//'); do
@@ -113,31 +112,31 @@ git_branch_commits() {
 }
 
 # GIT-GRAPHS
-git_trend_graph() {
+graph_git_trend() {
   local NUM_COMMITS=${1:-${DEFAULT_LOGS}}
   local BG=4
   local FG=15
   local TITLE="Number of Files changed::Additions/deletions in last $(tput bold)${NUM_COMMITS}$(tput setab ${BG})$(tput setaf ${FG}) commits"
   echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
-  git_trend | termgraph --stacked --color {cyan,red}
+  data_git_trend | termgraph --stacked --color {cyan,red}
 }
-git_log_calendar() {
-  local GIT_LOG_LENGTH=$(git_log_length)
+calendar_graph_git_log() {
+  local GIT_LOG_LENGTH=$(data_git_log_length)
   local BG=8
   local FG=15
   local TITLE="Trends over the total of $(tput bold)$(tput blink)${GIT_LOG_LENGTH} commits"
   echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
-  git_trend ${GIT_LOG_LENGTH} |
+  data_git_trend ${GIT_LOG_LENGTH} |
     tail -n +2 |
     cut --delimiter=',' -f1 |
     termgraph --calendar --color green
 }
-git_commit_graph() {
+graph_git_commit() {
   local NUM_COMMITS=${1:-${DEFAULT_COMMITS}}
-  git_commit ${NUM_COMMITS} |
+  data_git_commit ${NUM_COMMITS} |
     termgraph --color magenta --title "#Commit history for last ${NUM_COMMITS} logs"
 }
-git_leaderboard() {
+graph_git_leaderboard() {
   local NUM=${1:-${DEFAULT_LEADERS}}
   git shortlog --summary --numbered |
     head -${NUM} |
@@ -145,29 +144,79 @@ git_leaderboard() {
     termgraph --color yellow --title "LEADERBOARD:: Top ${NUM} Contributors"
 
 }
-git_hot_files_graph() {
+graph_git_hot_files() {
   local TOP_FILE=${1:-${DEFAULT_TOP_FILES}}
-  git_top_files_modified ${TOP_FILE} |
+  data_git_top_files_modified ${TOP_FILE} |
     awk '{print$2", "$1}' |
     termgraph --color blue --title "Most frequently updated files"
 }
-branch_comparison_graph() {
+graph_branch_comparison() {
   local TITLE="Number of commits on each branch"
-  git_branch_commits | termgraph --color black --title "${TITLE}"
+  data_git_branch_commits | termgraph --color black --title "${TITLE}"
 }
 
 # TEST
 # test: 1
-# git_trend_graph
-# git_trend_graph 15
-# git_trend_graph 15000
+# graph_git_trend
+# graph_git_trend 15
+# graph_git_trend 15000
 
 # MAIN
-git_commit_graph
-git_trend_graph
-git_log_calendar
-git_leaderboard
-git_hot_files_graph
-branch_comparison_graph
+all_insights() {
+  graph_git_commit
+  graph_git_trend
+  graph_git_leaderboard
+  graph_git_hot_files
+  graph_branch_comparison
+  calendar_graph_git_log
+  exit 0
+}
+
+__usage="
+${(U)APP_TAG} - get browser like colorful insights about a git repository on terminal
+
+USAGE:
+    ${APP_TAG}
+    ${APP_TAG} <subcommand>
+
+VALID SUBCOMMANDS:
+    graph_git_commit            displays Commit history for last 10 logs'
+    graph_git_trend             Number of Additions/deletions and files that changed'
+    graph_git_leaderboard       Top 10 Contributors'
+    graph_git_hot_files         Most frequently updated files'
+    graph_branch_comparison     Number of commits on each branch'
+    calendar_graph_git_log      Trends over the total number of commits on repo'
+
+EXAMPLES:
+    ${APP_TAG} graph_git_commit
+    ${APP_TAG} graph_git_trend
+"
+
+print_usage_n_exit() {
+  echo -e ${__usage}
+  exit 0
+}
+
+if [ $# -eq 0 ]
+  then
+    all_insights
+  else
+    [[ $# -ne 1 ]] && print_usage_n_exit
+    subcmd=$1
+    case $subcmd in
+        "graph_git_commit" )
+          graph_git_commit;;
+        "graph_git_trend" )
+          graph_git_trend;;
+        "graph_git_leaderboard" )
+          graph_git_leaderboard;;
+        "graph_git_hot_files" )
+          graph_git_hot_files;;
+        "graph_branch_comparison" )
+          graph_branch_comparison;;
+        "calendar_graph_git_log" )
+          calendar_graph_git_log;;
+   esac
+fi
 
 # END

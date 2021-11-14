@@ -9,6 +9,7 @@
 
 BUILD_LOG="./build/build.log"
 NAME="git-insight"
+
 tito build --rpm --test | tee ${BUILD_LOG}
 
 RPM=$(awk 'END{print $2}' ${BUILD_LOG})
@@ -28,4 +29,7 @@ AFTER="after = $(ls /usr/bin | wc)"
 git-insight
 
 echo -e "$BEFORE \n $AFTER"
+echo -e "Files installed on system = $(rpm -ql ${RPM} | wc -l)"
+rpm -ql ${RPM}
+
 # END

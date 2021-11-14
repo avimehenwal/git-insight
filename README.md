@@ -47,3 +47,10 @@ Analysis of current repo using this tool
 <a href="https://www.buymeacoffee.com/F1j07cV" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 Spread Love :hearts: and not :no_entry_sign: hatred [![Twitter Follow](https://img.shields.io/twitter/follow/avimehenwal.svg?style=social)](https://twitter.com/avimehenwal)
+
+1. Number of commites on a day
+1. Number of files changed, Number of changes (+/-) made on commits
+1. Trend over entire source history
+1. Top 10 contributors
+1. Most frequently updated files
+1. Branch comparison
