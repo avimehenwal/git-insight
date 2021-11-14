@@ -1,5 +1,5 @@
 Name:           git-insight
-Version:        1.1.0
+Version:        1.1.1
 Release:        1%{?dist}
 Summary:        beautiful graphical insights about a git repository
 License:        MIT
@@ -37,6 +37,9 @@ install -D --mode=644 -v build/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Sun Nov 14 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.1-1
+- feat(graph): :sparkles: total 6 graphs (avi.mehanwal@gmail.com)
+
 * Sun Nov 14 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.0-1
 - feat(graph): :zap: git commit trend calendar (avi.mehanwal@gmail.com)
 
