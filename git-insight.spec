@@ -1,5 +1,5 @@
 Name:           git-insight
-Version:        1.1.1
+Version:        1.1.2
 Release:        1%{?dist}
 Summary:        get browser like colorful insights about a git repository on terminal
 License:        MIT
@@ -40,6 +40,10 @@ install -D --mode=644 -v src/_completion %{buildroot}/usr/local/share/zsh/site-f
 /usr/local/share/zsh/site-functions/_%{name}
 
 %changelog
+* Sun Nov 14 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.2-1
+- feat(zsh): :fire: add auto completions (avi.mehanwal@gmail.com)
+- docs: :memo: sales pitch (avi.mehanwal@gmail.com)
+
 * Sun Nov 14 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.1-1
 - feat(graph): :sparkles: total 6 graphs (avi.mehanwal@gmail.com)
 
