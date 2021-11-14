@@ -1,7 +1,7 @@
 Name:           git-insight
 Version:        1.1.1
 Release:        1%{?dist}
-Summary:        beautiful graphical insights about a git repository
+Summary:        get browser like colorful insights about a git repository on terminal
 License:        MIT
 URL:            https://github.com/avimehenwal/git-insight
 Source0:        %{name}-%{version}.tar.gz
@@ -13,8 +13,9 @@ Requires:       coreutils sed git fzf
 Requires:       python3-pip
 
 %description
+%{Summary}
+
 Use it inside any directory
-beautiful graphical insights about a git repository.
 
 %prep
 # 1. unzip, unpacking sources

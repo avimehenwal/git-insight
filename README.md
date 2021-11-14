@@ -1,6 +1,6 @@
 # git-insight
 
-beautified git information for better understanding
+> get browser like colorful insights about a git repository on terminal
 
 [package](https://copr.fedorainfracloud.org/coprs/avimehenwal/git-insight/)
 
@@ -9,6 +9,13 @@ beautified git information for better understanding
 ```bash
 sudo dnf copr enable avimehenwal/git-insight
 sudo dnf install git-insight
+```
+
+## Usage
+
+```
+cd <path/to/a/git/repository>
+git-insight
 ```
 
 ## Demo
