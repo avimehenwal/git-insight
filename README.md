@@ -11,6 +11,8 @@
         \__, |_|\__|    |_|_| |_|___/_|\__, |_| |_|\__|
         |___/                          |___/
 
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/avimehenwal/git-insight/package/git-insight/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/avimehenwal/git-insight/package/git-insight/)
+
 ## How to install
 
 ```bash
