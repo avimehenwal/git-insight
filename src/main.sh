@@ -177,7 +177,11 @@ ${(U)APP_TAG} - get browser like colorful insights about a git repository on ter
 
 USAGE:
     ${APP_TAG}
+    ${APP_TAG} [OPTIONS]
     ${APP_TAG} <subcommand>
+
+OPTIONS:
+    -h  --help                  display help
 
 VALID SUBCOMMANDS:
     graph_git_commit            displays Commit history for last 10 logs'
@@ -188,8 +192,8 @@ VALID SUBCOMMANDS:
     calendar_graph_git_log      Trends over the total number of commits on repo'
 
 EXAMPLES:
+    ${APP_TAG} --help
     ${APP_TAG} graph_git_commit
-    ${APP_TAG} graph_git_trend
 "
 
 print_usage_n_exit() {
@@ -216,6 +220,8 @@ if [ $# -eq 0 ]
           graph_branch_comparison;;
         "calendar_graph_git_log" )
           calendar_graph_git_log;;
+        -h | --help | * )
+          print_usage_n_exit;;
    esac
 fi
 
