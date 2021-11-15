@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "rpm",
     "graph",
-    "zsh"
+    "zsh",
+    "completion"
   ]
 }

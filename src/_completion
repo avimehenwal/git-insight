@@ -2,6 +2,7 @@
 
 local -a graphs
 
+graphs+='--help:show me the usage and help'
 graphs+='graph_git_commit:displays Commit history for last 10 logs'
 graphs+='graph_git_trend:Number of Additions/deletions and files that changed'
 graphs+='graph_git_leaderboard:Top 10 Contributors'
