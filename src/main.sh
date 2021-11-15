@@ -118,7 +118,7 @@ graph_git_trend() {
   local FG=15
   local TITLE="Number of Files changed::Additions/deletions in last $(tput bold)${NUM_COMMITS}$(tput setab ${BG})$(tput setaf ${FG}) commits"
   echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
-  data_git_trend | termgraph --stacked --color {cyan,red}
+  data_git_trend ${NUM_COMMITS} | termgraph --stacked --color {cyan,red}
 }
 calendar_graph_git_log() {
   local GIT_LOG_LENGTH=$(data_git_log_length)
@@ -193,7 +193,8 @@ VALID SUBCOMMANDS:
 
 EXAMPLES:
     ${APP_TAG} --help
-    ${APP_TAG} graph_git_commit
+    ${APP_TAG} graph_git_commit 50
+    ${APP_TAG} graph_branch_comparison
 "
 
 print_usage_n_exit() {
@@ -205,21 +206,23 @@ if [ $# -eq 0 ]
   then
     all_insights
   else
-    [[ $# -ne 1 ]] && print_usage_n_exit
+    [[ $# -gt 2 ]] && print_usage_n_exit
     subcmd=$1
+    shift
+    subcmd_args=${@}
     case $subcmd in
         "graph_git_commit" )
-          graph_git_commit;;
+          graph_git_commit ${subcmd_args};;
         "graph_git_trend" )
-          graph_git_trend;;
+          graph_git_trend ${subcmd_args};;
         "graph_git_leaderboard" )
-          graph_git_leaderboard;;
+          graph_git_leaderboard ${subcmd_args};;
         "graph_git_hot_files" )
-          graph_git_hot_files;;
+          graph_git_hot_files ${subcmd_args};;
         "graph_branch_comparison" )
-          graph_branch_comparison;;
+          graph_branch_comparison ${subcmd_args};;
         "calendar_graph_git_log" )
-          calendar_graph_git_log;;
+          calendar_graph_git_log ${subcmd_args};;
         -h | --help | * )
           print_usage_n_exit;;
    esac
