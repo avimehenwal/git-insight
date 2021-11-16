@@ -17,3 +17,9 @@ able to install package and run from SHELL but NOT from CMD in docker
 ## Termgraph
 
 - color NOT working with calendar graph type
+
+## openSUSE
+
+- completions not working on suse
+  - fpath is not defined, lazy loading not working
+- Allow command to run only inside git repositories

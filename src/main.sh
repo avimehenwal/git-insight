@@ -204,6 +204,17 @@ print_usage_n_exit() {
   exit 0
 }
 
+not_a_git_repo() {
+__not_git="
+WARNING: Directory ${PWD} is not a git repository
+kindly use this command inside a git initialized repo
+"
+  echo $__not_git && WARN $__not_git
+  exit 1
+}
+
+test -d ${PWD}/.git || not_a_git_repo
+
 if [ $# -eq 0 ]
   then
     all_insights
