@@ -17,6 +17,8 @@ DEFAULT_COMMITS=10
 DEFAULT_LEADERS=10
 DEFAULT_TOP_FILES=8
 
+GRAPHER=${HOME}/.local/bin/termgraph
+
 SYSLOG() {
   local LOG_LEVEL=$1
   shift
@@ -118,7 +120,7 @@ graph_git_trend() {
   local FG=15
   local TITLE="Number of Files changed::Additions/deletions in last $(tput bold)${NUM_COMMITS}$(tput setab ${BG})$(tput setaf ${FG}) commits"
   echo -e "\n$(tput setab ${BG})$(tput setaf ${FG})  ${TITLE}  $(tput sgr0)"
-  data_git_trend ${NUM_COMMITS} | termgraph --stacked --color {cyan,red}
+  data_git_trend ${NUM_COMMITS} | ${GRAPHER} --stacked --color {cyan,red}
 }
 calendar_graph_git_log() {
   local GIT_LOG_LENGTH=$(data_git_log_length)
@@ -129,30 +131,30 @@ calendar_graph_git_log() {
   data_git_trend ${GIT_LOG_LENGTH} |
     tail -n +2 |
     cut --delimiter=',' -f1 |
-    termgraph --calendar --color green
+    ${GRAPHER} --calendar --color green
 }
 graph_git_commit() {
   local NUM_COMMITS=${1:-${DEFAULT_COMMITS}}
   data_git_commit ${NUM_COMMITS} |
-    termgraph --color magenta --title "#Commit history for last ${NUM_COMMITS} logs"
+    ${GRAPHER} --color magenta --title "#Commit history for last ${NUM_COMMITS} logs"
 }
 graph_git_leaderboard() {
   local NUM=${1:-${DEFAULT_LEADERS}}
   git shortlog --summary --numbered |
     head -${NUM} |
     awk '{print $2 $3 $4, $1}' |
-    termgraph --color yellow --title "LEADERBOARD:: Top ${NUM} Contributors"
+    ${GRAPHER} --color yellow --title "LEADERBOARD:: Top ${NUM} Contributors"
 
 }
 graph_git_hot_files() {
   local TOP_FILE=${1:-${DEFAULT_TOP_FILES}}
   data_git_top_files_modified ${TOP_FILE} |
     awk '{print$2", "$1}' |
-    termgraph --color blue --title "Most frequently updated files"
+    ${GRAPHER} --color blue --title "Most frequently updated files"
 }
 graph_branch_comparison() {
   local TITLE="Number of commits on each branch"
-  data_git_branch_commits | termgraph --color black --title "${TITLE}"
+  data_git_branch_commits | ${GRAPHER} --color black --title "${TITLE}"
 }
 
 # TEST
