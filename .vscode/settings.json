@@ -3,6 +3,7 @@
     "rpm",
     "graph",
     "zsh",
-    "completion"
+    "completion",
+    "linux"
   ]
 }

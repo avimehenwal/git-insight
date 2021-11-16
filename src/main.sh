@@ -171,6 +171,7 @@ all_insights() {
   graph_git_hot_files
   graph_branch_comparison
   calendar_graph_git_log
+  INFO "All graphs summary requested"
   exit 0
 }
 
@@ -201,16 +202,19 @@ EXAMPLES:
 
 print_usage_n_exit() {
   echo -e ${__usage}
+  WARN "Invalid subcommand or arguments -> ${@}"
   exit 0
 }
 
 not_a_git_repo() {
-__not_git="
-WARNING: Directory ${PWD} is not a git repository
-kindly use this command inside a git initialized repo
-"
-  echo $__not_git && WARN $__not_git
+  local error="command called from a non git-root directory -> ${PWD}"
+  local error_desc="kindly use this command from the root of a git initialized repo"
+  echo "${error}\n${error_desc}" && WARN "${error}"
   exit 1
+}
+
+track_program_call() {
+  DEBUG "graph requested -> ${1}"
 }
 
 test -d ${PWD}/.git || not_a_git_repo
@@ -219,25 +223,31 @@ if [ $# -eq 0 ]
   then
     all_insights
   else
-    [[ $# -gt 2 ]] && print_usage_n_exit
+    [[ $# -gt 2 ]] && print_usage_n_exit ${@}
     subcmd=$1
     shift
     subcmd_args=${@}
-    case $subcmd in
+    case ${subcmd} in
         "graph_git_commit" )
-          graph_git_commit ${subcmd_args};;
+          graph_git_commit ${subcmd_args}
+          track_program_call ${subcmd};;
         "graph_git_trend" )
-          graph_git_trend ${subcmd_args};;
+          graph_git_trend ${subcmd_args}
+          track_program_call ${subcmd};;
         "graph_git_leaderboard" )
-          graph_git_leaderboard ${subcmd_args};;
+          graph_git_leaderboard ${subcmd_args}
+          track_program_call ${subcmd};;
         "graph_git_hot_files" )
-          graph_git_hot_files ${subcmd_args};;
+          graph_git_hot_files ${subcmd_args}
+          track_program_call ${subcmd};;
         "graph_branch_comparison" )
-          graph_branch_comparison ${subcmd_args};;
+          graph_branch_comparison ${subcmd_args}
+          track_program_call ${subcmd};;
         "calendar_graph_git_log" )
-          calendar_graph_git_log ${subcmd_args};;
+          calendar_graph_git_log ${subcmd_args}
+          track_program_call ${subcmd};;
         -h | --help | * )
-          print_usage_n_exit;;
+          print_usage_n_exit ${subcmd};;
    esac
 fi
 
