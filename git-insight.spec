@@ -7,10 +7,11 @@ URL:            https://github.com/avimehenwal/git-insight
 Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 
-BuildRequires:  pandoc make
+BuildRequires:  pandoc make pyp2rpm
 Requires:       bash >= 5.1.8
 Requires:       coreutils sed git fzf
-Requires:       python3-pip
+Requires:       python3-termgraph
+
 
 %description
 %{Summary}
@@ -23,7 +24,6 @@ Use it inside any directory
 %autosetup
 
 %pre
-python3 -m pip install --user termgraph
 
 %build
 make man

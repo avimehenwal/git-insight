@@ -37,7 +37,12 @@ endif
 local: man
 	./entrypoint.sh
 
+pypi:
+	pyp2rpm termgraph -t fedora --srpm -b 3 -p 3 -d ./pyDEPS
+	mock -r fedora-35-x86_64 ./pyDEPS/*.src.rpm
+	tree ./pyDEPS
 
+# Wrote: /builddir/build/RPMS/python3-termgraph-0.5.3-1.fc35.noarch.rpm
 
 clean:
-	rm -v $(MANPAGE)
+	rm -rvf $(MANPAGE) pyDEPS

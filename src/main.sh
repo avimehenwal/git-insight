@@ -17,7 +17,7 @@ DEFAULT_COMMITS=10
 DEFAULT_LEADERS=10
 DEFAULT_TOP_FILES=8
 
-GRAPHER=${HOME}/.local/bin/termgraph
+GRAPHER=/usr/bin/termgraph
 
 SYSLOG() {
   local LOG_LEVEL=$1

@@ -57,3 +57,12 @@ Extra Packages for Enterprise Linux (EPEL) - Fedora Docs
 | chmod 755 | directory For files that should be readable and executable by others, but only changeable by the issuing user. |
 | chmod 775 | file Standard file sharing mode for a group.                                                                   |
 | chmod 777 | file Everybody can do everything to this file.                                                                 |
+
+## pyp2RPM packaging dependencies
+
+tool generates 3 output files
+
+Output: ['python-termgraph-0.5.3-1.fc34.src.rpm', 'python-termgraph.spec', 'termgraph-0.5.3.tar.gz']
+
+Requires ONLY accepts RPMs, How to create RPM?
+using mock, tito tool
