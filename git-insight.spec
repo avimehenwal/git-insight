@@ -1,5 +1,5 @@
 Name:           git-insight
-Version:        1.1.5
+Version:        1.1.6
 Release:        1%{?dist}
 Summary:        get browser like colorful insights about a git repository on terminal
 License:        MIT
@@ -40,6 +40,9 @@ install -D --mode=644 -v src/_completion %{buildroot}/usr/local/share/zsh/site-f
 /usr/local/share/zsh/site-functions/_%{name}
 
 %changelog
+* Wed Dec 15 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.6-1
+- build(rpm): :zap: pypi -> rpm (avi.mehanwal@gmail.com)
+
 * Tue Nov 16 2021 avimehenwal <avi.mehanwal@gmail.com> 1.1.5-1
 - feat(linux): :coffin: enable syslog (avi.mehanwal@gmail.com)
 - fix: :lock: run only in GIT enabled directories (avi.mehanwal@gmail.com)
