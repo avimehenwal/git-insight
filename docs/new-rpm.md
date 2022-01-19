@@ -24,6 +24,13 @@ rpmlint git-insight.spec
 tito build --rpm --test
 ```
 
+### Using tito
+
+```
+tito tag
+tito release copr
+```
+
 ### Verify
 
 ```

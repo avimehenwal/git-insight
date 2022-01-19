@@ -43,6 +43,7 @@ pypi:
 	tree ./pyDEPS
 
 # Wrote: /builddir/build/RPMS/python3-termgraph-0.5.3-1.fc35.noarch.rpm
+# fedora only supports python3 now
 
 clean:
 	rm -rvf $(MANPAGE) pyDEPS

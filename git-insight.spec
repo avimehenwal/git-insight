@@ -7,7 +7,7 @@ URL:            https://github.com/avimehenwal/git-insight
 Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 
-BuildRequires:  pandoc make pyp2rpm
+BuildRequires:  pandoc make
 Requires:       bash >= 5.1.8
 Requires:       coreutils sed git fzf
 Requires:       python3-termgraph
